@@ -1,4 +1,5 @@
 function [prod, index] = max_product(v, n)
+
 prod = 0;
 index = -1;
 
@@ -7,25 +8,25 @@ if(iscolumn(v))
 end
 
 if(size(v,2) >= n)
-    
-    prod = v(1);
     index = 1;
-    for count = 1:n-1
-        prod = prod*v(1+count);
-    end
+    prod = get_index_product(v, 1, n);
 
     for i = 1:size(v,2)-n+1
+       
+        new_prod = get_index_product(v, i, n);
         
-        temp_prod = v(i);
-        for count = 1:n-1
-            temp_prod = temp_prod*v(i+count);
-        end
-        
-        if(temp_prod > prod)
-             prod = temp_prod;
+        if(new_prod > prod)
+             prod = new_prod;
              index = i;
         end
         
     end
 end
+end
+
+function prod = get_index_product(v, index, n)
+    prod = v(index);
+    for count = 1:n-1
+        prod = prod*v(index+count);
+    end
 end
